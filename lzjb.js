@@ -60,12 +60,6 @@ var jslzjb = (function() {
         while (src < slen)
         {
             if ((copymask <<= 1) == (1 << NBBY)) {
-                if (dst >= slen - 1 - 2 * NBBY) {
-                    mlen = slen;
-                    for (src = 0, dst = 0; mlen; mlen--)
-                        dstart[dst++] = sstart[src++];
-                    return dstart;
-                }
                 copymask = 1;
                 copymap = dst;
                 dstart[dst++] = 0;
