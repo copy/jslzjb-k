@@ -22,6 +22,31 @@ decompress: 55.874ms
 compressed /bin/node from=14059k to=9348k
 ```
 
+Two methods are exported:
+
+```javascript
+/**
+  * Compress byte array using fast and efficient algorithm.
+  *
+  * @param {Uint8Array} sstart  The buffer to compress
+  * @param {Uint8Array} dstart  The buffer to write into
+  * @return {number} compressed length (number of bytes written to the
+  *                  output buffer). May be bigger than the size of the
+  *                  output buffer, in which case some bytes are lost
+  */
+jslzjb.compress = function(sstart, dstart)
+
+/**
+ * Decompress byte array using fast and efficient algorithm.
+ *
+ * @param {Uint8Array} sstart  The buffer to decompress
+ * @param {number} slen  compressed length
+ * @param {Uint8Array} dstart  The buffer to write into
+ * @return {number} decompressed length
+ */
+jslzjb.decompress = function(sstart, slen, dstart)
+```
+
 **TODO**
 
 - Benchmarks

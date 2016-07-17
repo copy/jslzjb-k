@@ -17,8 +17,6 @@ var jslzjb = (function() {
         /** @const */ LEMPEL_SIZE = 256;
 
     /**
-     * Compress string or byte array using fast and efficient algorithm.
-     *
      * Because of weak of javascript's natural, many compression algorithm
      * become useless in javascript implementation. The main problem is
      * performance, even the simple Huffman, LZ77/78 algorithm will take many
@@ -30,9 +28,13 @@ var jslzjb = (function() {
      * usr/src/uts/common/os/compress.c
      * It is licensed under CDDL.
      *
+     * Compress byte array using fast and efficient algorithm.
+     *
      * @param {Uint8Array} sstart  The buffer to compress
      * @param {Uint8Array} dstart  The buffer to write into
-     * @return {number} compressed length
+     * @return {number} compressed length (number of bytes written to the
+     *                  output buffer). May be bigger than the size of the
+     *                  output buffer, in which case some bytes are lost
      */
     function compress(sstart, dstart)
     {
@@ -102,17 +104,16 @@ var jslzjb = (function() {
     }
 
     /**
-     * Decompress string or byte array using fast and efficient algorithm.
-     *
      * Our implementation is based on
      * http://src.opensolaris.org/source/raw/onnv/onnv-gate/
      * usr/src/uts/common/os/compress.c
      * It is licensed under CDDL.
      *
+     * Decompress byte array using fast and efficient algorithm.
+     *
      * @param {Uint8Array} sstart  The buffer to decompress
      * @param {number} slen  compressed length
      * @param {Uint8Array} dstart  The buffer to write into
-     *
      * @return {number} decompressed length
      */
     function decompress(sstart, slen, dstart)
