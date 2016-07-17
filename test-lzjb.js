@@ -22,7 +22,16 @@ console.time("decompress");
 l.decompress(out, len, orig);
 console.timeEnd("decompress");
 
-console.log("compressed %s from=%dk to=%dk", filename, inp.length >> 10, len >> 10);
+var from = inp.length;
+var to = len;
+
+if(from >= 1024 && to >= 1024)
+{
+    from = (from >> 10) + "k";
+    to = (to >> 10) + "k";
+}
+
+console.log("compressed %s from=%s to=%s", filename, from, to);
 
 for(var i = 0; i < inp.length; i++)
 {
