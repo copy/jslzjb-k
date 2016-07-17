@@ -96,7 +96,6 @@ var jslzjb = (function() {
             }
         }
 
-        console.assert(dstart.length >= dst);
         console.assert(sstart.length >= src);
 
         return dst;

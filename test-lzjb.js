@@ -11,12 +11,19 @@ if(!filename)
 var l = require("./lzjb.js");
 
 var inp = new Uint8Array(require("fs").readFileSync(filename));
-var out = new Uint8Array(Math.max(inp.length, 16 * 1024));
+var out = new Uint8Array(Math.max(inp.length * 1.5 | 0, 16 * 1024));
+//var out = new Uint8Array(inp.length);
 var orig = new Uint8Array(inp.length);
 
 console.time("compress");
 var len = l.compress(inp, out);
 console.timeEnd("compress");
+console.assert(typeof len === "number");
+if(len > out.length)
+{
+    console.error("Output buffer for file %s is too small (buffer size is %d, needed %d)", filename, out.length, len);
+    process.exit(1);
+}
 
 console.time("decompress");
 l.decompress(out, len, orig);
